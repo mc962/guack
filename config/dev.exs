@@ -44,3 +44,14 @@ config :guack, Guack.Repo,
   database: "guack_dev",
   hostname: "localhost",
   pool_size: 10
+
+
+config :guack, Guack.Guardian,
+  allowed_algos: ["HS512"],
+  verify_module: Guardian.JWT,
+  issuer: "Guack",
+  ttl: [30, :days],
+  allowed_drift: 2000,
+  verify_issuer: true,
+  serializer: Guack.Guardian,
+  secret_key: "/snVj3Y3turjDDT8exjg7ujm6xRV2C3NFdiPYcb+Ekrj1xeU5flOeL0vn2HiV+Om"

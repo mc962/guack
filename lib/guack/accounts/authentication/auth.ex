@@ -22,6 +22,16 @@ defmodule Guack.Auth do
     end
   end
 
+  def store_token(%User{} = user, token) do
+    user
+    |> User.store_token_changeset(%{token: token})
+    |> Repo.update()
+  end
+
+  def revoke_token(user, token) do
+    store_token(user, token)
+  end
+
   def login(conn, user) do
     conn
     |> Guardian.Plug.sign_in(user)

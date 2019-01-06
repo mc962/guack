@@ -1,18 +1,27 @@
 defmodule GuackWeb.Router do
   use GuackWeb, :router
 
-  pipeline :api do
-    plug :accepts, ["json"]
+  pipeline :graphql do
+    plug Guack.Context
   end
 
-  pipeline :authentication do
-    plug(Guack.Authentication.AccessPipeline)
+  scope "/api" do
+    pipe_through(:graphql)
+    forward("/graphiql", Absinthe.Plug.GraphiQL, schema: Guack.Web.Schema, interface: :advanced)
+    forward("/", Absinthe.Plug, schema: Guack.Web.Schema)
   end
 
-  scope "/api", GuackWeb do
-    pipe_through :api
-  end
+  # pipeline :api do
+  #   plug :accepts, ["json", Absinthe.Plug.Parser]
+  # end
 
-  forward("/graphql", Absinthe.Plug, schema: Guack.Web.Schema)
-  forward("/graphiql", Absinthe.Plug.GraphiQL, schema: Guack.Web.Schema)
+  # pipeline :authentication do
+  #   plug(Guack.Authentication.AccessPipeline)
+  # end
+
+  # scope "/", GuackWeb do
+  #   pipe_through [:api]
+  # end
+
+
 end

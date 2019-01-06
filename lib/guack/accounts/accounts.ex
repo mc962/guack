@@ -3,6 +3,7 @@ defmodule Guack.Accounts do
   The Accounts context
   """
 
+  import Ecto.Query, warn: false
   alias Guack.Repo
 
   alias Guack.Accounts.User
@@ -24,6 +25,11 @@ defmodule Guack.Accounts do
   def get_user(id) do
     User
     |> Repo.get(id)
+  end
+
+  def get_user_by_username(username) do
+    User
+    |> Repo.get_by(username: username)
   end
 
   def change_user_registration(%User{} = user) do
