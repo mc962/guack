@@ -37,3 +37,6 @@ guack-*.tar
 
 # files for elixir_ls plugin
 .elixir_ls/
+
+# JetBrains IDE
+.idea/
