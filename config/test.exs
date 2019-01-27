@@ -18,7 +18,7 @@ config :guack, Guack.Repo,
   pool: Ecto.Adapters.SQL.Sandbox
 
 # Configure Guardian
-config :guack, Guack.Guardian,
+config :guack, Guack.Authentication.Guardian,
   allowed_algos: ["HS512"],
   verify_module: Guardian.JWT,
   ttl: [30, :days],

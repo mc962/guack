@@ -56,12 +56,12 @@ config :guack, Guack.Repo,
   pool_size: 10
 
 # Configure Guardian
-config :guack, Guack.Guardian,
+config :guack, Guack.Authentication.Guardian,
   allowed_algos: ["HS512"],
   verify_module: Guardian.JWT,
   ttl: [30, :days],
   allowed_drift: 2000,
   verify_issuer: true,
-  serializer: Guack.Guardian,
+  serializer: Guack.Authentication.Guardian,
   issuer: "guack",
   secret_key: "NYM5I8Xm9DiQnvOgFxikHbWNj1a36ttkOAW/z/77JrgEqNqyJOI9UndTN5MLxurs"
